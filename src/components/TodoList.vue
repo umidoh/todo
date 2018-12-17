@@ -1,10 +1,13 @@
 <template>
   <div id="todo-list">
     <h1>Todo List</h1>
+
     <input v-model="newItem" @keyup.enter="addNewItem">
     <ol>
       <todo-item v-for="item in todoList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
     </ol>
+
+    <p>{{ todoCount }} items left</p>
   </div>
 </template>
 
@@ -25,6 +28,11 @@ export default Vue.extend({
       ],
       newItem: ""
     };
+  },
+  computed: {
+    todoCount: function() {
+      return this.todoList.filter(item => !item.done).length;
+    }
   },
   methods: {
     addNewItem() {
