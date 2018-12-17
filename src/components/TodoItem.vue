@@ -1,7 +1,7 @@
 <template>
   <li>
     <input type="checkbox" v-bind:id="todo.id" v-model="todo.done">
-    <span v-bind:class="{ deleted: todo.done }">{{ todo.text }}</span>
+    <span v-bind:class="{ done: todo.done }">{{ todo.text }}</span>
   </li>
 </template>
 
@@ -15,7 +15,7 @@ export default Vue.extend({
 </script>
 
 <style>
-.deleted {
+.done {
   text-decoration: line-through;
 }
 </style>
