@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <Todo/>
+    <TodoList/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import Todo from "./components/Todo.vue";
+import TodoList from "./components/TodoList.vue";
 
 export default Vue.extend({
   name: "app",
   components: {
-    Todo
+    TodoList
   }
 });
 </script>
