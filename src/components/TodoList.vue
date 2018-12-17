@@ -7,7 +7,7 @@
       <todo-item v-for="item in todoList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
     </ol>
 
-    <p>{{ todoCount }} items left</p>
+    <p>{{ activeItemCount }} items left</p>
   </div>
 </template>
 
@@ -22,15 +22,12 @@ export default Vue.extend({
   },
   data: function() {
     return {
-      todoList: [
-        { id: 0, text: "A", done: false },
-        { id: 1, text: "B", done: true }
-      ],
+      todoList: [],
       newItem: ""
     };
   },
   computed: {
-    todoCount: function() {
+    activeItemCount: function() {
       return this.todoList.filter(item => !item.done).length;
     }
   },
