@@ -1,5 +1,8 @@
 <template>
-  <li>{{ todo.text }}</li>
+  <li>
+    <input type="checkbox" v-bind:id="todo.id" v-model="todo.done">
+    <span v-bind:class="{ deleted: todo.done }">{{ todo.text }}</span>
+  </li>
 </template>
 
 <script>
@@ -10,3 +13,9 @@ export default Vue.extend({
   props: ["todo"]
 });
 </script>
+
+<style>
+.deleted {
+  text-decoration: line-through;
+}
+</style>
