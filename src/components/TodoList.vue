@@ -48,6 +48,7 @@ export default Vue.extend({
   methods: {
     addNewItem() {
       this.todoList.push({ text: this.newItemText, done: false });
+      this.newItemText = "";
     },
     setFilter(filter) {
       this.listFilter = filter;
