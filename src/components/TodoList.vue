@@ -39,7 +39,6 @@ export default Vue.extend({
   },
   beforeCreate: function() {
     axios.defaults.baseURL = "http://localhost:3000";
-    axios.defaults.headers.post["Content-Type"] = "application/json";
   },
   created: function() {
     this.listFilter = this.filterAll;
@@ -58,6 +57,7 @@ export default Vue.extend({
       const newItem = { title: this.newItemTitle, done: false };
       this.todoList.push(newItem);
       axios.post("/todos", newItem);
+
       this.newItemTitle = "";
     },
     setFilter(filter) {
