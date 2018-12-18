@@ -37,11 +37,13 @@ export default Vue.extend({
       listFilter: undefined
     };
   },
+  beforeCreate: function() {
+    axios.defaults.baseURL = "http://localhost:3000";
+    axios.defaults.headers.post["Content-Type"] = "application/json";
+  },
   created: function() {
     this.listFilter = this.filterAll;
-    axios
-      .get("http://localhost:3000/todos")
-      .then(response => (this.todoList = response.data));
+    axios.get("/todos").then(response => (this.todoList = response.data));
   },
   computed: {
     activeItemCount: function() {
@@ -53,7 +55,9 @@ export default Vue.extend({
   },
   methods: {
     addNewItem() {
-      this.todoList.push({ title: this.newItemTitle, done: false });
+      const newItem = { title: this.newItemTitle, done: false };
+      this.todoList.push(newItem);
+      axios.post("/todos", newItem);
       this.newItemTitle = "";
     },
     setFilter(filter) {
