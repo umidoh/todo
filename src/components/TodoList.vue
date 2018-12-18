@@ -19,6 +19,7 @@
 
 <script>
 import Vue from "vue";
+import axios from "axios";
 import TodoItem from "./TodoItem.vue";
 
 export default Vue.extend({
@@ -38,6 +39,9 @@ export default Vue.extend({
   },
   created: function() {
     this.listFilter = this.filterAll;
+    axios
+      .get("http://localhost:3000/todos")
+      .then(response => (this.todoList = response.data));
   },
   computed: {
     activeItemCount: function() {
