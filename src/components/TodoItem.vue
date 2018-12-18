@@ -7,10 +7,19 @@
 
 <script>
 import Vue from "vue";
+import axios from "axios";
 
 export default Vue.extend({
   name: "TodoItem",
-  props: ["todo"]
+  props: ["todo"],
+  watch: {
+    todo: {
+      handler(newItem, oldItem) {
+        axios.put("/todos/" + newItem.id, newItem);
+      },
+      deep: true
+    }
+  }
 });
 </script>
 
