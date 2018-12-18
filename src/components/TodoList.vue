@@ -8,9 +8,9 @@
     </ol>
 
     <span>
-      <input type="radio" id="opt1" name="filter" v-on:change="setFilter(filterAll)">All
-      <input type="radio" id="opt2" name="filter" v-on:change="setFilter(filterActive)">Active
-      <input type="radio" id="opt3" name="filter" v-on:change="setFilter(filterCompleted)">Completed
+      <input type="radio" id="opt1" name="filter" @input="setFilter(filterAll)" checked>All
+      <input type="radio" id="opt2" name="filter" @input="setFilter(filterActive)">Active
+      <input type="radio" id="opt3" name="filter" @input="setFilter(filterCompleted)">Completed
     </span>
 
     <p>{{ activeItemCount }} items left</p>
@@ -27,15 +27,17 @@ export default Vue.extend({
     TodoItem
   },
   data: function() {
-    const filterAll = item => item;
     return {
       todoList: [],
       newItemText: "",
-      filterAll: filterAll,
+      filterAll: item => item,
       filterActive: item => !item.done,
       filterCompleted: item => item.done,
-      listFilter: filterAll
+      listFilter: undefined
     };
+  },
+  created: function() {
+    this.listFilter = this.filterAll;
   },
   computed: {
     activeItemCount: function() {
