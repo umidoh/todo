@@ -1,7 +1,7 @@
 <template>
   <li>
     <input type="checkbox" v-bind:id="todo.id" v-model="todo.done">
-    <span v-bind:class="{ done: todo.done }">{{ todo.text }}</span>
+    <span v-bind:class="{ done: todo.done }">{{ todo.title }}</span>
   </li>
 </template>
 

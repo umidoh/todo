@@ -2,7 +2,7 @@
   <div id="todo-list">
     <h1>Todo List</h1>
 
-    <input v-model="newItemText" @keyup.enter="addNewItem">
+    <input v-model="newItemTitle" @keyup.enter="addNewItem">
     <ol>
       <todo-item v-for="item in filteredTodoList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
     </ol>
@@ -29,7 +29,7 @@ export default Vue.extend({
   data: function() {
     return {
       todoList: [],
-      newItemText: "",
+      newItemTitle: "",
       filterAll: item => item,
       filterActive: item => !item.done,
       filterCompleted: item => item.done,
@@ -49,8 +49,8 @@ export default Vue.extend({
   },
   methods: {
     addNewItem() {
-      this.todoList.push({ text: this.newItemText, done: false });
-      this.newItemText = "";
+      this.todoList.push({ title: this.newItemTitle, done: false });
+      this.newItemTitle = "";
     },
     setFilter(filter) {
       this.listFilter = filter;
