@@ -3,6 +3,7 @@
     <h1>Todo List</h1>
 
     <input v-model="newItemTitle" @keyup.enter="addNewItem">
+
     <ol>
       <todo-item v-for="item in filteredTodoList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
     </ol>
@@ -41,7 +42,7 @@ export default Vue.extend({
     axios.defaults.baseURL = "http://localhost:3000";
   },
   created: function() {
-    this.listFilter = this.filterAll;
+    this.setFilter(this.filterAll);
     axios.get("/todos").then(response => (this.todoList = response.data));
   },
   computed: {
