@@ -43,7 +43,7 @@ export default Vue.extend({
   },
   created: async function() {
     this.setFilter(this.filterAll);
-    const respone = await axios.get("/todos");
+    const response = await axios.get("/todos");
     this.todoList = response.data;
   },
   computed: {
