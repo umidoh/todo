@@ -20,6 +20,7 @@
 
 <script>
 import Vue from "vue";
+import { sync } from "vuex-dry";
 import axios from "axios";
 import TodoItem from "./TodoItem.vue";
 
@@ -30,7 +31,6 @@ export default Vue.extend({
   },
   data: function() {
     return {
-      todoList: [],
       newItemTitle: "",
       filterAll: item => item,
       filterActive: item => !item.done,
@@ -44,9 +44,16 @@ export default Vue.extend({
   created: async function() {
     this.setFilter(this.filterAll);
     const response = await axios.get("/todos");
-    this.todoList = response.data;
+    this.todos = response.data.reduce((acc, item) => {
+      acc[item.id] = item;
+      return acc;
+    }, {});
   },
   computed: {
+    todos: sync("todo/todos"),
+    todoList() {
+      
+    },
     activeItemCount: function() {
       return this.todoList.filter(this.filterActive).length;
     },
