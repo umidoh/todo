@@ -41,9 +41,10 @@ export default Vue.extend({
   beforeCreate: function() {
     axios.defaults.baseURL = "http://localhost:3000";
   },
-  created: function() {
+  created: async function() {
     this.setFilter(this.filterAll);
-    axios.get("/todos").then(response => (this.todoList = response.data));
+    const respone = await axios.get("/todos");
+    this.todoList = response.data;
   },
   computed: {
     activeItemCount: function() {
